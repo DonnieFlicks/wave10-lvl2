@@ -23,6 +23,13 @@
 //
 // Log all four to the console.
 
+const fullName = "Adonis Pontier"; // Const - my name will never change (unless I go to court and change it legally but that will never happen because I love the name my momma gave me!!)
+let age = 30; // Let - my age will change every year
+let city = "NYC"; // Let - I can choose to move somewhere different
+let isStudent = true; // Let - Once I graduate from this course I will no longer be a student
+
+console.log(fullName, age, city, isStudent);
+
 // ----------------------------------------------------------
 // TASK 2 — Update what can change
 // ----------------------------------------------------------
@@ -33,6 +40,15 @@
 // Then try to reassign fullName.
 // Read the error, then comment that line out.
 
+city = "Orlando";
+isStudent = false;
+
+console.log(city, isStudent);
+
+// fullName = "Peter Parker";
+// ERROR = Uncaught TypeError: Assignment to constant variable.
+
+
 // ----------------------------------------------------------
 // TASK 3 — Undefined in the wild
 // ----------------------------------------------------------
@@ -41,6 +57,12 @@
 //
 // Now assign it a movie title.
 // Log it again.
+
+let favoriteMovie;
+console.log(favoriteMovie); // undefined variable
+
+favoriteMovie = "Scott Pilgrim Vs The World";
+console.log(favoriteMovie);
 
 // ----------------------------------------------------------
 // TASK 4 — Build a product listing
@@ -56,6 +78,18 @@
 // Log each variable on its own line.
 // Then log: productName + " by " + productBrand + " — $" + productPrice
 
+const productName = "Silent Basketball";
+const productBrand = "Ballers Inc.";
+const productPrice = 35.95;
+let inStock = true; // product can run out if enough people buy the product
+
+console.log(productName);
+console.log(productBrand);
+console.log(productPrice);
+console.log(inStock);
+
+console.log(productName + " by " + productBrand + " - $" + productPrice);
+
 // ----------------------------------------------------------
 // TASK 5 — Stock status update
 // ----------------------------------------------------------
@@ -67,6 +101,13 @@
 // Why did this fail but inStock worked?
 // Write your answer as a comment.
 
+inStock = false;
+console.log("In stock: " + inStock);
+
+// productName = "Loud Basketball";
+// ERROR = Uncaught TypeError: Assignment to constant variable
+// This failed because productName is a const and cannot be changed.
+
 // ----------------------------------------------------------
 // TASK 6 — Fix the bad names
 // ----------------------------------------------------------
@@ -77,6 +118,13 @@
 //   my score      → fix it
 //   X             → rename to something descriptive, then declare it
 //   GaMeLeVeL     → fix the casing
+
+let secondPlayer = "Luffy";
+let myScore = 30000000; // 30 million
+let saveFile = 1;
+let gameLevel = "Alabasta"
+
+console.log(secondPlayer, myScore, saveFile, gameLevel);
 
 // ----------------------------------------------------------
 // TASK 7 — Two-step declaration
@@ -92,6 +140,15 @@
 //
 // You should see three console lines: undefined → 500 → 750
 
+let highScore;
+console.log(highScore);
+
+highScore = 500;
+console.log(highScore);
+
+highScore = 750;
+console.log(highScore);
+
 // ----------------------------------------------------------
 // TASK 8 — Connect the variables
 // ----------------------------------------------------------
@@ -103,6 +160,11 @@
 // Log: appName + " v" + version + " — built by " + authorName
 // Expected format: "TaskMaster v3 — built by [your name]"
 
+const appName = "TaskMaster";
+const version = 3;
+const authorName = "Adonis Pontier";
+
+console.log(appName + " v" + version + " -built by " + authorName);
 // ----------------------------------------------------------
 // ⭐ STRETCH GOAL
 // ----------------------------------------------------------
@@ -115,3 +177,15 @@
 // Then reassign currentYear... wait, can you? Why not?
 // Write the answer as a comment.
 // What keyword would you need if currentYear could change?
+
+const startYear = 2020;
+const currentYear = 2025;
+let yearsRunning = currentYear - startYear;
+
+console.log(appName + " has been running for " + yearsRunning + " years");
+
+// currentYear = 2026;
+
+// You CANNOT reassign currentYear because we declared the variable as a --const--.
+// keyword for currentYear should be --let-- because the years will change as time passes
+

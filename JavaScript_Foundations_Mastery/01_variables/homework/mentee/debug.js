@@ -18,8 +18,14 @@ console.log(storeName);
 
 // What's wrong ↓
 
+    //  you are trying to assign a new 
+    // value to a --const-- variable, which CANNOT have its value changed.
+
 // Your fix ↓
 
+    let storeName = "TechMart";
+    storeName = "MegaShop";
+    console.log(storeName);
 
 // ----------------------------------------------------------
 // 🟡 DEBUG 2 — Medium
@@ -33,8 +39,15 @@ console.log("Total: $" + orderTotal);
 
 // What's wrong ↓
 
+    // Item2Price is undefined. The "I" in Item2Price is capitalized, 
+    // yet the declared variable is "item2Price" with a lowercase "i".
+
 // Your fix ↓
 
+let item1Price = 19.99;
+let item2Price = 34.99;
+let orderTotal = item1Price + item2Price;
+console.log("Total: $" + orderTotal);
 
 // ----------------------------------------------------------
 // 🔴 DEBUG 3 — Hard
@@ -52,4 +65,12 @@ console.log(productName + " — $" + productPrice);
 
 // What's wrong ↓
 
+    // Using the --var-- keyword creates a variable that can cause scoping issues.
+    // The "productName" and "productPrice" variable names are being used in the app.js file.
+    // By using --var-- you can accidentally re-declare a variable in the same scope.
+
 // Your fix ↓
+
+    let productName = "Headphones";
+    let productPrice = 49.99;
+    console.log(productName + " — $" + productPrice);
