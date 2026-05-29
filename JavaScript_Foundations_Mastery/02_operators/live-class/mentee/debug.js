@@ -31,8 +31,8 @@ const minAge = 18;
 let userAge = 16;
 console.log("Meets requirement: " + (userAge >= minAge));
 
-// What's wrong ↓ the = should be === or >= to compare if the requirment is met.
-
+// What's wrong ↓
+    // the = should be === or >= to compare if the requirment is met.
 // Your fix ↓
 
 // ----------------------------------------------------------
