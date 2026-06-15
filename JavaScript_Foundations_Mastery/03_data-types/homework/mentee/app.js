@@ -57,7 +57,7 @@ const testInputs = {
 
 function isValidUsername(random) {
   if (typeof random !== "string") {
-    return { valid: false, message: "Username should be a string" };
+    return { valid: false, message: "Username must be a string" };
   }
   if (random.length < 3) {
     return {
@@ -158,6 +158,9 @@ console.log(isValidEmail(testInputs.noDomainEmail));
 // Test with validAge ("28"), youngAge ("12"), textAge ("twenty"), negativeAge ("-5").
 //
 // Write a comment: why use Number() instead of parseInt() here?
+
+        // Number() is used when you expect a full numeric value and want a strict conversion from string to number
+        // parseInt() is used when you only need an integer or want to parse numbers from strings with extra characters.
 
 function isValidAge(ageInput) {
   const age = Number(ageInput);
@@ -267,13 +270,27 @@ console.log(isValidPassword(testInputs.noSpecialPassword));
 // Rerun your tests from Tasks 1-4 through this formatter.
 
 function formatValidationResult(fieldName, result) {
-  return `${result.valid ? "✅" : "❌"} ${fieldName}: ${result.message}`;
+  return `${ result.valid ? "✅" : "❌"} ${fieldName}: ${result.message}`;
 }
 
 console.log("\n--- Task 5: Formatted Results ---");
 // Rerun at least 3 tests from each validator through formatValidationResult
 
-console.log(formatValidationResult())
+console.log(formatValidationResult("Username Validation", {valid: true, message: 'alexdev is a valid username'}));
+console.log(formatValidationResult("Username Validation", {valid: false, message: 'Username must be at least 3 characters long (got 2)'}));
+console.log(formatValidationResult("Username Validation", {valid: false, message: 'Username cannot have spaces'}));
+
+console.log(formatValidationResult("Email Validation", {valid: true, cleanEmail: 'alex@devstudio.com', message: 'alex@devstudio.com is a valid email'}));
+console.log(formatValidationResult("Email Validation", {valid: false, cleanEmail: 'alexdevstudio.com', message: "Email must have a '@' "}));
+console.log(formatValidationResult("Email Validation", {valid: false, cleanEmail: 'alex@', message: "Email must include a '.' "}));
+
+console.log(formatValidationResult("Age Validation", {valid: true, message: 'Valid age: 46'}));
+console.log(formatValidationResult("Age Validation", {valid: false, message: 'Age must be 120 or below (got 124)'}));
+console.log(formatValidationResult("Age Validation", {valid: false, message: 'Age must be at least 13 (got 7)'}));
+
+console.log(formatValidationResult("Password Validation", {valid: true, message: 'Password meets all requirements.'}));
+console.log(formatValidationResult("Password Validation", {valid: false, message: 'Password needs: at least 8 characters, one uppercase letter'}));
+console.log(formatValidationResult("Password Validation", {valid: false, message: 'Password needs: one number'}));
 
 // ----------------------------------------------------------
 // TASK 6 — validateSignUpForm
@@ -309,12 +326,37 @@ console.log(formatValidationResult())
 // For each, log whether the form is valid and then
 // log each field result through formatValidationResult.
 
+const validSignUpForm = {
+  username: "alexdev",
+  email: "alex@devstudio.com",
+  age: "28",
+  password: "SecurePass1!"
+}
+
+const invalidSignUpForm = {
+  username: "al",
+  email: "not-an-email",
+  age: "twelve",
+  password: "abc"
+}
+
 function validateSignUpForm(formData) {
-  // your code here
+
+  let results = {
+    username: isValidUsername(formData.username),
+    email: isValidEmail(formData.email),
+    age: isValidAge(formData.age),
+    password: isValidPassword(formData.password)
+  }
+  
+  const formValid = Object.values(results).every(r => r.valid);
+
+  return { valid: formValid, results};
 }
 
 console.log("\n--- Task 6: Full Form Validation ---");
-// your code here
+console.log(validateSignUpForm(validSignUpForm));
+console.log(validateSignUpForm(invalidSignUpForm));
 
 // ----------------------------------------------------------
 // TASK 7 — cleanFormData
@@ -340,12 +382,28 @@ console.log("\n--- Task 6: Full Form Validation ---");
 //     password: "SecurePass1!"
 //   })
 
+const rawFormData = {
+  username: "  AlexDev  ",
+  email: "  ALEX@DEVSTUDIO.COM",
+  age: "  28  ",
+  password: "SecurePass1!"
+}
+
 function cleanFormData(rawFormData) {
-  // your code here
+  let cleanData = {
+    username: rawFormData.username.trim().toLowerCase(),
+    email: rawFormData.email.trim().toLowerCase(),
+    age: rawFormData.age.trim(),
+    password: rawFormData.password
+  }
+
+  return cleanData;
 }
 
 console.log("\n--- Task 7: Cleaning Form Data ---");
-// your code here
+console.log(`Cleaned username: ${rawFormData.username} -> ${cleanFormData(rawFormData).username}`);
+console.log(`Cleaned username: ${rawFormData.email} -> ${cleanFormData(rawFormData).email}`);
+console.log(`Cleaned username: ${rawFormData.age} -> ${cleanFormData(rawFormData).age}`);
 
 // ----------------------------------------------------------
 // TASK 8 — Connect the dots: full pipeline
@@ -360,8 +418,15 @@ console.log("\n--- Task 7: Cleaning Form Data ---");
 // Write a comment: why clean before validating?
 // (Hint: would " ALEX@DEVSTUDIO.COM " pass the email validator?)
 
+const cleaned = cleanFormData(rawFormData);
+const validation = validateSignUpForm(cleaned);
+
 console.log("\n--- Task 8: Full Pipeline ---");
-// your code here
+console.log(formatValidationResult("Username Validation", {valid: true, message: 'alexdev is a valid username'}));
+console.log(formatValidationResult("Email Validation", {valid: true, cleanEmail: 'alex@devstudio.com', message: 'alex@devstudio.com is a valid email'}));
+console.log(formatValidationResult("Age Validation", {valid: true, message: 'Valid age: 46'}));
+console.log(formatValidationResult("Password Validation", {valid: true, message: 'Password meets all requirements.'}));
+
 
 // ----------------------------------------------------------
 // ⭐ STRETCH GOAL — formatSummary

@@ -9,16 +9,20 @@
 // This should log the user's full name in title case.
 // Instead it logs "undefined Rivera". What's wrong?
 
-const user = { firstName: "alex", lastName: "Rivera" };
+// const user = { firstName: "alex", lastName: "Rivera" };
 
-const { firstname, lastName } = user;
-const fullName = `${firstname} ${lastName}`;
-console.log(fullName); // "undefined Rivera"
+// const { firstname, lastName } = user;
+// const fullName = `${firstname} ${lastName}`;
+// console.log(fullName); // "undefined Rivera"
 
 // What's wrong ↓
-
+          // "alex" is stored in firstName but the variable calling for alex is "firstname". 2 Different variables.
 // Your fix ↓
+const correctUser = { firstName: "alex", lastName: "Rivera"};
 
+const {firstName, lastName} = correctUser;
+const correctFullName = `${firstName} ${lastName}`;
+console.log(correctFullName); // "alex Rivera"
 
 // ----------------------------------------------------------
 // 🟡 DEBUG 2 — Medium
@@ -35,11 +39,11 @@ function validateUsername(username) {
 }
 
 console.log(validateUsername(""));       // ✅ catches empty string
-console.log(validateUsername("   "));    // ❌ should be invalid — logs "Valid:    "
+console.log(validateUsername("   ").trim());    // ❌ should be invalid — logs "Valid:    "
 console.log(validateUsername("alexdev")); // ✅ valid
 
 // What's wrong ↓
-
+          // "   " <- spaces are considered truthy, so (!username) does not catch it. Must use .trim() to clear spaces.
 // Your fix ↓
 
 
