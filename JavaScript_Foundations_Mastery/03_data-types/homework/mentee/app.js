@@ -450,7 +450,9 @@ console.log(formatValidationResult("Password Validation", {valid: true, message:
 // Write a comment: what does Object.entries() return?
 
 function formatSummary(validationResult) {
-  // your code here
+  Object.entries(validationResult.results).forEach(([field, result]) => {
+    
+  })
 }
 
 console.log("\n--- Stretch: formatSummary ---");

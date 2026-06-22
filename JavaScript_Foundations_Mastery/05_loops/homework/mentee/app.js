@@ -37,6 +37,19 @@
 //
 // Log: "🛒 " + storeName + " — Cart started"
 
+
+const storeName = "QuickShop";
+const budget = 100;
+const itemLimit = 30;
+const discountThreshold = 80;
+const discountRate = 0.10;
+let cartTotal = 0;
+let itemsAdded = 0;
+let itemsSkipped = 0;
+
+console.log(`🛒 ${storeName} - Cart started`);
+
+
 // ----------------------------------------------------------
 // TASK 2 — Declare your item prices
 // ----------------------------------------------------------
@@ -47,6 +60,15 @@
 //   item4Price → 8
 //   item5Price → 42
 //   item6Price → 28
+
+
+const item1Price = 22;
+const item2Price = 35;
+const item3Price = 15;
+const item4Price = 8;
+const item5Price = 42;
+const item6Price = 28;
+
 
 // ----------------------------------------------------------
 // TASK 3 — Loop through the items

@@ -15,16 +15,22 @@
 let score = 30;
 const passing = 60;
 
-if (score = passing) {
+// if (score = passing) {
+//   console.log("Pass ✅");
+// } else {
+//   console.log("Fail ❌");
+// }
+
+// What's wrong ↓
+    // score = passing is a reassignment of the variable. Does not compare.
+// Your fix ↓
+    // change (score = passing) to (score === passing)
+
+if (score === passing) {
   console.log("Pass ✅");
 } else {
   console.log("Fail ❌");
 }
-
-// What's wrong ↓
-
-// Your fix ↓
-
 
 // ----------------------------------------------------------
 // 🟡 DEBUG 2 — Medium
@@ -44,8 +50,14 @@ if (height >= minHeight && withAdult) {
 }
 
 // What's wrong ↓
-
+      // the && operator requires both conditions to be true. Must use the || operator. This allows any condition to be true.
 // Your fix ↓
+
+if (height >= minHeight || withAdult) {
+  console.log("🎢 Enjoy the ride!");
+} else {
+  console.log("🚫 Sorry, you cannot ride.");
+}
 
 
 // ----------------------------------------------------------
@@ -56,20 +68,32 @@ if (height >= minHeight && withAdult) {
 // One is a style issue from a previous lesson.
 // Find both.
 
-var orderTotal = 85;
+// var orderTotal = 85;
 
-if (orderTotal >= 50) {
-  console.log("🚚 Standard shipping: $5");
-}
+// if (orderTotal >= 50) {
+//   console.log("🚚 Standard shipping: $5");
+// }
+// if (orderTotal >= 100) {
+//   console.log("🚀 Free express shipping!");
+// }
+// if (orderTotal < 50) {
+//   console.log("📦 Economy shipping: $9.99");
+// }
+
+// Bug 1 ↓
+      // var should not be used. Only const or let
+// Bug 2 ↓
+      // order of conditions should be largest at the top, working your way down.
+// Your fix ↓
+
+let orderTotal = 85;
+
 if (orderTotal >= 100) {
   console.log("🚀 Free express shipping!");
+}
+if (orderTotal >= 50) {
+  console.log("🚚 Standard shipping: $5");
 }
 if (orderTotal < 50) {
   console.log("📦 Economy shipping: $9.99");
 }
-
-// Bug 1 ↓
-
-// Bug 2 ↓
-
-// Your fix ↓
