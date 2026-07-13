@@ -21,9 +21,11 @@ const product = {
 console.log(product.Category);
 
 // What's wrong ↓
-
+                // the "Category" key when trying to console.log is capitalized
+                // but the key in the product object is lowercase so it wont pick it up.
 // Your fix ↓
 
+console.log(product.category);
 
 // ----------------------------------------------------------
 // 🟡 DEBUG 2 — Medium
@@ -38,13 +40,21 @@ const inventory = [
 ];
 
 for (let i = 0; i < inventory.length; i++) {
-  console.log(inventory[i].name + " — $" + inventory[i].price);
+  console.log(inventory[i].Name + " — $" + inventory[i].Price);
 }
 
 // What's wrong ↓
-
+                // same with debug 1... capitalizations are not matched.
+                // either change the object keys to lower case OR match the key name
+                // in the console.log on line 43.
 // Your fix ↓
+            // make the keys in the object lowercase.
 
+// const inventory = [
+//   { name: "Shirt",  price: 29.99 },
+//   { name: "Jeans",  price: 59.99 },
+//   { name: "Jacket", price: 89.99 }
+// ];
 
 // ----------------------------------------------------------
 // 🔴 DEBUG 3 — Hard
@@ -60,14 +70,19 @@ const products = [
 
 let totalValue = 0;
 
-for (let i = 0; i <= products.length; i++) {
-  totalValue += products[i].price * products.stock;
+for (let i = 0; i < products.length; i++) {
+  totalValue += products[i].price * products[i].stock;
 }
 
 console.log("Total value: $" + totalValue);
 
 // Bug 1 ↓
-
+          // products[i].stock for the totalValue variable
 // Bug 2 ↓
-
+          // for loop needs to be (i=0; i < products.length; i++)
 // Your fix ↓
+
+
+// for (let i = 0; i < products.length; i++) {
+//   totalValue += products[i].price * products[i].stock;
+// }
