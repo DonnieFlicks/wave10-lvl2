@@ -1,0 +1,231 @@
+/* ============================================
+   Daily Habits — styles.css
+   Warm, paper-like theme with an ink-green accent
+   ============================================ */
+
+/* CSS variables: define colors once, reuse everywhere */
+:root {
+  --paper: #faf6ef;        /* page background */
+  --ink: #26332c;          /* main text color */
+  --ink-soft: #6f7d75;     /* secondary text */
+  --accent: #2f6d4f;       /* green accent */
+  --accent-soft: #e3eee7;  /* pale green for fills */
+  --line: #ddd5c7;         /* borders */
+  --card: #fffdf8;         /* habit row background */
+}
+
+/* Dark mode - activated when <body> has data-theme = "dark" */
+body[data-theme="dark"] {
+  --paper: #1b1f1c;
+  --ink: #eae6dc;
+  --ink-soft: #9aa39c;
+  --accent: #5fb98a;
+  --accent-soft: #24352c;
+  --line: #3a423c;
+  --card: #242822;
+}
+
+/* Smooth color transition when switching themes */
+body,
+.habit-row,
+#habit-input,
+#habit-form button {
+  transition: background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+}
+
+/* Reset: remove browser default spacing */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Karla", sans-serif;
+  background: var(--paper);
+  color: var(--ink);
+  min-height: 100vh;
+  /* subtle dotted texture so the background isn't flat */
+  background-image: radial-gradient(var(--line) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+.theme-toggle {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    border: 1.5px solid var(--line);
+    background: var(--card);
+    font-size: 1.5rem;
+    line-height: 1;
+    cursor: pointer;
+    display: flex;
+    align-items: center;;
+    justify-content: center;
+    z-index: 10;                        /* stays above other content */
+}
+
+.theme-toggle:hover {
+    border-color: var(--accent);
+}
+
+/* --------- Header --------- */
+.app-header {
+  max-width: 560px;
+  margin: 0 auto;
+  padding: 48px 20px 8px;
+}
+
+h1 {
+  font-family: "Fraunces", serif;
+  font-size: 2.4rem;
+  letter-spacing: -0.02em;
+}
+
+.today-date {
+  color: var(--ink-soft);
+  margin-top: 4px;
+  font-size: 0.95rem;
+}
+
+/* --------- Layout --------- */
+main {
+  max-width: 560px;
+  margin: 0 auto;
+  padding: 16px 20px 64px;
+}
+
+/* --------- Add-habit form --------- */
+#habit-form {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 24px;
+}
+
+#habit-input {
+  flex: 1;                 /* input stretches, button stays small */
+  font: inherit;
+  padding: 12px 14px;
+  border: 1.5px solid var(--line);
+  border-radius: 10px;
+  background: var(--card);
+  color: var(--ink);
+}
+
+#habit-input:focus {
+  outline: 2px solid var(--accent);
+  border-color: transparent;
+}
+
+#habit-form button {
+  font: inherit;
+  font-weight: 700;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 10px;
+  background: var(--accent);
+  color: #fff;
+  cursor: pointer;
+}
+
+#habit-form button:hover {
+  background: #275c42;
+}
+
+/* --------- Progress --------- */
+.progress {
+  margin-bottom: 20px;
+}
+
+.progress-text {
+  font-size: 0.9rem;
+  color: var(--ink-soft);
+  margin-bottom: 6px;
+}
+
+.progress-bar {
+  height: 8px;
+  border-radius: 999px;
+  background: var(--accent-soft);
+  overflow: hidden;        /* keeps the fill's corners rounded */
+}
+
+.progress-fill {
+  height: 100%;
+  width: 0%;               /* JavaScript updates this */
+  background: var(--accent);
+  border-radius: 999px;
+  transition: width 0.35s ease;
+}
+
+/* --------- Habit list --------- */
+.habit-list {
+  list-style: none;        /* remove bullet points */
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.habit-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--card);
+  border: 1.5px solid var(--line);
+  border-radius: 12px;
+  padding: 14px 16px;
+}
+
+/* Bigger, accent-colored checkbox */
+.habit-row input[type="checkbox"] {
+  width: 22px;
+  height: 22px;
+  accent-color: var(--accent);
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.habit-name {
+  flex: 1;                 /* name takes the leftover space */
+  font-size: 1.05rem;
+  font-weight: 500;
+  word-break: break-word;
+}
+
+/* When a habit is done, cross it out and fade it */
+.habit-row.done {
+  background: var(--accent-soft);
+  border-color: transparent;
+}
+
+.habit-row.done .habit-name {
+  text-decoration: line-through;
+  color: var(--ink-soft);
+}
+
+.delete-btn {
+  font: inherit;
+  font-size: 1.1rem;
+  border: none;
+  background: none;
+  color: var(--ink-soft);
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 6px;
+}
+
+.delete-btn:hover {
+  color: #a13f2e;
+  background: #f6e6e1;
+}
+
+/* --------- Empty state --------- */
+.empty-message {
+  text-align: center;
+  color: var(--ink-soft);
+  padding: 32px 0;
+  font-style: italic;
+}

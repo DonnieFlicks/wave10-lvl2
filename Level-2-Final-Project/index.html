@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Daily Habits</title>
+
+  <!-- Fonts: Fraunces for headings, Karla for everything else -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Karla:wght@400;500;700&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <button id="theme-toggle" class="theme-toggle" aria-label="Dark Mode">🌙</button>
+
+  <header class="app-header">
+    <h1>Daily Habits</h1>
+    <!-- JavaScript fills in today's date here -->
+    <p id="today-date" class="today-date"></p>
+  </header>
+
+  <main>
+    <!-- Form for adding a new habit -->
+    <section class="add-habit" aria-label="Add a new habit">
+      <form id="habit-form">
+        <input
+          type="text"
+          id="habit-input"
+          placeholder="e.g. Drink water, Read 10 pages…"
+          autocomplete="off"
+          maxlength="60"
+          required
+        />
+        <button type="submit">Add</button>
+      </form>
+    </section>
+
+    <!-- Progress summary, e.g. "2 of 5 done" -->
+    <section class="progress" aria-label="Today's progress">
+      <p id="progress-text" class="progress-text"></p>
+      <div class="progress-bar">
+        <div id="progress-fill" class="progress-fill"></div>
+      </div>
+    </section>
+
+    <!-- Habit list: starts empty, JavaScript fills it in -->
+    <section aria-label="Your habits">
+      <ul id="habit-list" class="habit-list"></ul>
+      <!-- Shown only when there are no habits yet -->
+      <p id="empty-message" class="empty-message">
+        No habits yet. Add your first one above.
+      </p>
+    </section>
+  </main>
+
+  <!-- Script at the bottom so the HTML above exists before it runs -->
+  <script src="app.js"></script>
+</body>
+</html>

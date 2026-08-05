@@ -244,7 +244,7 @@ console.log(`All priority multi-item: ${itemPrio}`);
 // Start the accumulator at 0.
 // Store in totalRevenue.
 // Log: "Total revenue: $" + totalRevenue
-//
+//56
 // Use reduce to count the total number of items across all orders.
 // Store in totalItems.
 // Log: "Total items ordered: " + totalItems
@@ -276,6 +276,8 @@ console.log(totalRevenue);
 //   "Unconfirmed revenue: $" + pendingRevenue
 //   (This is money that hasn't been secured yet)
 
+
+delivered.filter().reduce()
 // ----------------------------------------------------------
 // TASK 10 — Full pipeline (all methods)
 // ----------------------------------------------------------
