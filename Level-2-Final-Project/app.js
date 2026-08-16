@@ -13,6 +13,7 @@ const progressText = document.getElementById("progress-text");
 const progressFill = document.getElementById("progress-fill");
 const todayDate = document.getElementById("today-date");
 const themeToggle = document.getElementById("theme-toggle");
+const quote = document.getElementById("quote");
 
 // ---------- 2. Our data ----------
 // Each habit is an object like: { id: 1721900000, name: "Drink water", done: false }
@@ -50,6 +51,20 @@ function resetIfNewDay() {
     saveHabits();
   }
 }
+
+
+fetch("https://thequoteshub.com/api/")
+  .then(response => {
+    if (!response.ok){
+      throw new Error("Error, resouce could not be found. Sorry!")
+    }
+    return response.json()
+  })
+  .then(data => {
+    quote.textContent = data.text;
+  })
+  .catch(error => console.error(error));
+
 
 // ---------- 4. Rendering ----------
 // This function redraws the whole list from the `habits` array.
@@ -193,3 +208,4 @@ todayDate.textContent = new Date().toLocaleDateString(undefined, {
 loadHabits();
 resetIfNewDay();
 render();
+loadTheme();

@@ -4,12 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Daily Habits</title>
-
-  <!-- Fonts: Fraunces for headings, Karla for everything else -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Karla:wght@400;500;700&display=swap" rel="stylesheet" />
-
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
@@ -20,6 +15,7 @@
     <h1>Daily Habits</h1>
     <!-- JavaScript fills in today's date here -->
     <p id="today-date" class="today-date"></p>
+    <blockquote id="quote" class="quote">When life gives you lemons make lemonade.<!-- inspirational quote here --></blockquote>
   </header>
 
   <main>
@@ -38,7 +34,7 @@
       </form>
     </section>
 
-    <!-- Progress summary, e.g. "2 of 5 done" -->
+    <!-- Progress summary, example: "2 of 5 done" -->
     <section class="progress" aria-label="Today's progress">
       <p id="progress-text" class="progress-text"></p>
       <div class="progress-bar">
