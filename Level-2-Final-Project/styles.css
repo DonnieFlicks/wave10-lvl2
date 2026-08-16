@@ -12,6 +12,7 @@
   --accent-soft: #e3eee7;  /* pale green for fills */
   --line: #ddd5c7;         /* borders */
   --card: #fffdf8;         /* habit row background */
+  --content-width: 560px;  /* shared width for header + main */
 }
 
 /* Dark mode - activated when <body> has data-theme = "dark" */
@@ -50,6 +51,11 @@ body {
   background-size: 24px 24px;
 }
 
+.quote {
+  font-family: cursive;
+  color: #3c5547;
+}
+
 .theme-toggle {
     position: fixed;
     top: 20px;
@@ -74,7 +80,7 @@ body {
 
 /* --------- Header --------- */
 .app-header {
-  max-width: 560px;
+  max-width: var(--content-width);
   margin: 0 auto;
   padding: 48px 20px 8px;
 }
@@ -93,7 +99,7 @@ h1 {
 
 /* --------- Layout --------- */
 main {
-  max-width: 560px;
+  max-width: var(--content-width);
   margin: 0 auto;
   padding: 16px 20px 64px;
 }
@@ -228,4 +234,31 @@ main {
   color: var(--ink-soft);
   padding: 32px 0;
   font-style: italic;
+}
+
+/* --------- Small screens --------- */
+@media (max-width: 480px) {
+  h1 {
+    font-size: 1.9rem;
+  }
+
+  .app-header {
+    padding: 36px 16px 8px;
+  }
+
+  main {
+    padding: 16px 16px 48px;
+  }
+
+  #habit-form {
+    flex-direction: column;
+  }
+
+  .theme-toggle {
+    top: 12px;
+    right: 12px;
+    width: 38px;
+    height: 38px;
+    font-size: 1.3rem;
+  }
 }

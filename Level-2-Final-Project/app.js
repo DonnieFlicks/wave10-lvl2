@@ -4,7 +4,7 @@
    saving habits so they survive page refreshes.
    ============================================ */
 
-// ---------- 1. Grab the HTML elements we need ----------
+// ---------- Grab the HTML elements we need ----------
 const form = document.getElementById("habit-form");
 const input = document.getElementById("habit-input");
 const list = document.getElementById("habit-list");
@@ -15,11 +15,27 @@ const todayDate = document.getElementById("today-date");
 const themeToggle = document.getElementById("theme-toggle");
 const quote = document.getElementById("quote");
 
-// ---------- 2. Our data ----------
+// ---------- Our data ----------
 // Each habit is an object like: { id: 1721900000, name: "Drink water", done: false }
 let habits = [];
 
-// ---------- 3. Saving & loading (localStorage) ----------
+// ---------- Quote API ---------
+// Grabs a quote from the internet for "motivation"
+
+fetch("https://thequoteshub.com/api/")
+  .then(response => {
+    if (!response.ok){
+      throw new Error("Error, resouce could not be found. Sorry!")
+    }
+    return response.json()
+  })
+  .then(data => {
+    quote.textContent = data.text;
+  })
+  .catch(error => console.error(error));
+
+
+// ---------- Saving & loading (localStorage) ----------
 // localStorage lets the browser remember data between visits.
 // It only stores text, so we convert our array to a JSON string and back.
 
@@ -52,21 +68,7 @@ function resetIfNewDay() {
   }
 }
 
-
-fetch("https://thequoteshub.com/api/")
-  .then(response => {
-    if (!response.ok){
-      throw new Error("Error, resouce could not be found. Sorry!")
-    }
-    return response.json()
-  })
-  .then(data => {
-    quote.textContent = data.text;
-  })
-  .catch(error => console.error(error));
-
-
-// ---------- 4. Rendering ----------
+// ---------- Rendering ----------
 // This function redraws the whole list from the `habits` array.
 // Whenever the data changes, we call render() and the page updates.
 
@@ -123,7 +125,7 @@ function updateProgress() {
   progressFill.style.width = (done / total) * 100 + "%";
 }
 
-// ---------- 5. Actions ----------
+// ---------- Actions ----------
 
 function addHabit(name) {
   habits.push({
@@ -154,7 +156,7 @@ function deleteHabit(id) {
   render();
 }
 
-// ---------- 6. Wire up the form ----------
+// ---------- Wire up the form ----------
 
 form.addEventListener("submit", function (event) {
   event.preventDefault(); // stop the page from reloading
@@ -165,39 +167,39 @@ form.addEventListener("submit", function (event) {
     input.focus();
   }
 });
-// ---------- 7. Dark Mode ----------
+// ---------- Dark Mode ----------
 // We store just the string "dark" or "light" under its own localStorage key,
 // separate from the habits data.
 
 function applyTheme(theme) {
-    if (theme === "dark") {
-        document.body.setAttribute("data-theme", "dark");
-        themeToggle.textContent = "☀️"; // show a sun, meaning "tap to go light"
-    } else {
-        document.body.removeAttribute("data-theme");
-        themeToggle.textContent = "🌙"; // show a moon, meaning "tap to go dark"
-    }
+  if (theme === "dark") {
+    document.body.setAttribute("data-theme", "dark");
+    themeToggle.textContent = "☀️"; // show a sun, meaning "tap to go light"
+  } else {
+    document.body.removeAttribute("data-theme");
+    themeToggle.textContent = "🌙"; // show a moon, meaning "tap to go dark"
+  }
 }
 
 function loadTheme() {
-    const saved = localStorage.getItem("theme");
-    if (saved) {
-        applyTheme(saved);
-    } else {
-        // No saved preference yet — fall back to the user's system setting
-        const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-        applyTheme(prefersDark ? "dark" : "light");
-    }
+  const saved = localStorage.getItem("theme");
+  if (saved) {
+    applyTheme(saved);
+  } else {
+    // No saved preference yet — fall back to the user's system setting
+    const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+    applyTheme(prefersDark ? "dark" : "light");
+  }
 }
 
 themeToggle.addEventListener("click", function () {
-    const isDark = document.body.getAttribute("data-theme") === "dark";
-    const newTheme = isDark ? "light" : "dark";
-    applyTheme(newTheme);
-    localStorage.setItem("theme", newTheme);
+  const isDark = document.body.getAttribute("data-theme") === "dark";
+  const newTheme = isDark ? "light" : "dark";
+  applyTheme(newTheme);
+  localStorage.setItem("theme", newTheme);
 });
 
-// ---------- 8. Start the app ----------
+// ---------- Start the app ----------
 
 todayDate.textContent = new Date().toLocaleDateString(undefined, {
   weekday: "long",
